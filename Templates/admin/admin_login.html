@@ -9,10 +9,10 @@
 <body>
     <div class="container mt-5">
         <div class="text-right mb-2">
-            <a href="{{url_for('professional_signup')}}" class="register-professional text-primary">Register as Professional</a>
+            <a href="{{url_for('professional.professional_signup')}}" class="register-professional text-primary">Register as Professional</a>
         </div>
         <h1 class="text-center mb-4">Admin Login</h1>
-        <form action="{{ url_for('login') }}" method="POST">
+        <form action="{{ url_for('admin.login') }}" method="POST">
             <div class="form-group">
                 <label for="email">Registered Email ID:</label>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
@@ -24,7 +24,7 @@
             <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
         </form>
         <div class="text-center mt-3">
-            <a href="{{ url_for('customer_signup') }}" class="text-secondary">Create Account?</a>
+            <a href="{{ url_for('customer.customer_signup') }}" class="text-secondary">Create Account?</a>
         </div>
     </div>
 

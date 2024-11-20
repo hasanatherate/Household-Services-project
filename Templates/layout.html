@@ -19,20 +19,20 @@
                 <nav class="nav">
                     <!-- Dynamically rendered links based on user_role -->
                     {% if user_role == 'admin' %}
-                        <a class="nav-link ps-0" href="{{ url_for('admin_dashboard') }}">Dashboard</a>
-                        <a class="nav-link" href="{{ url_for('admin_search') }}">Search</a>
-                        <a class="nav-link" href="{{ url_for('admin_summary') }}">Summary</a>
+                        <a class="nav-link ps-0" href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('admin.admin_search') }}">Search</a>
+                        <a class="nav-link" href="{{ url_for('admin.admin_summary') }}">Summary</a>
                     {% elif user_role == 'customer' %}
-                        <a class="nav-link ps-0" href="{{ url_for('customer_dashboard') }}">Dashboard</a>
-                        <a class="nav-link" href="{{ url_for('customer_search') }}">Search</a>
-                        <a class="nav-link" href="{{ url_for('customer_summary') }}">Summary</a>
+                        <a class="nav-link ps-0" href="{{ url_for('customer.customer_dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('customer.customer_search') }}">Search</a>
+                        <a class="nav-link" href="{{ url_for('customer.customer_summary') }}">Summary</a>
                     {% elif user_role == 'professional' %}
-                        <a class="nav-link ps-0" href="{{ url_for('professional_dashboard') }}">Dashboard</a>
-                        <a class="nav-link" href="{{ url_for('professional_search') }}">Search</a>
-                        <a class="nav-link" href="{{ url_for('professional_summary') }}">Summary</a>
+                        <a class="nav-link ps-0" href="{{ url_for('professional.professional_dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('professional.professional_search') }}">Search</a>
+                        <a class="nav-link" href="{{ url_for('professional.professional_summary') }}">Summary</a>
                     {% endif %}
                     <span class="nav-link">|</span>
-                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="nav-link" href="{{ url_for('admin.login') }}">Logout</a>
                 </nav>
             </div>
         </div>

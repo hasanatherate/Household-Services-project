@@ -8,10 +8,10 @@
         <h3>Best Cleaning Packages</h3>
         <div class="list-group">
             <!-- Main services with links to subservices -->
-            <a href="{{ url_for('subservices', main_service='cleaning') }}" class="list-group-item list-group-item-action">Cleaning</a>
-            <a href="{{ url_for('subservices', main_service='ac_repair') }}" class="list-group-item list-group-item-action">AC Repair</a>
-            <a href="{{ url_for('subservices', main_service='salon') }}" class="list-group-item list-group-item-action">Salon</a>
-            <a href="{{ url_for('subservices', main_service='electrical') }}" class="list-group-item list-group-item-action">Electrical</a>
+            <a href="{{ url_for('customer.subservices', main_service='cleaning') }}" class="list-group-item list-group-item-action">Cleaning</a>
+            <a href="{{ url_for('customer.subservices', main_service='ac_repair') }}" class="list-group-item list-group-item-action">AC Repair</a>
+            <a href="{{ url_for('customer.subservices', main_service='salon') }}" class="list-group-item list-group-item-action">Salon</a>
+            <a href="{{ url_for('customer.subservices', main_service='electrical') }}" class="list-group-item list-group-item-action">Electrical</a>
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
                     <td>Full Home Cleaning</td>
                     <td>John Doe</td>
                     <td>1234567890</td>
-                    <td><a href="{{ url_for('remarks')}}" class="btn btn-outline-primary btn-sm">Close it?</a></td>
+                    <td><a href="{{ url_for('customer.remarks')}}" class="btn btn-outline-primary btn-sm">Close it?</a></td>
                 </tr>
                 <tr>
                     <td>2</td>

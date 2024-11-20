@@ -9,7 +9,7 @@
     <!-- Search Functionality Section -->
     <section class="mb-4">
         <h3>Search for Services</h3>
-        <form method="GET" action="{{ url_for('customer_search') }}">
+        <form method="GET" action="{{ url_for('customer.customer_search') }}">
             <div class="mb-3">
                 <label for="service-name" class="form-label">Search by Service Name, Pin Code, etc.</label>
                 <input type="text" class="form-control" id="service-name" name="service-name" placeholder="Enter service name or pin code">
@@ -75,7 +75,7 @@
                     <td>{{ service.name }}</td>
                     <td>{{ service.professional_name }}</td>
                     <td>{{ service.phone_no }}</td>
-                    <td><a href="{{ url_for('close_service', service_id=service.id) }}" class="btn btn-danger">Close it?</a></td>
+                    <td><a href="{{ url_for('customer.remarks', service_id=service.id) }}" class="btn btn-danger">Close it?</a></td>
                 </tr>
                 {% else %}
                 <tr>
