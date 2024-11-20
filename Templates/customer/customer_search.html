@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block content %}
+<main class="container py-4">
+    <h2>Welcome to the Customer Dashboard</h2>
+
+    <!-- Search Functionality Section -->
+    <section class="mb-4">
+        <h3>Search for Services</h3>
+        <form method="GET" action="{{ url_for('customer_search') }}">
+            <div class="mb-3">
+                <label for="service-name" class="form-label">Search by Service Name, Pin Code, etc.</label>
+                <input type="text" class="form-control" id="service-name" name="service-name" placeholder="Enter service name or pin code">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </section>
+
+    <!-- Salon Packages Section -->
+    <section class="mb-4">
+        <h3>Best Salon Packages</h3>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="path-to-image.jpg" class="card-img-top" alt="Salon Classic">
+                    <div class="card-body">
+                        <h5 class="card-title">Salon Classic</h5>
+                        <p class="card-text">Details about ratings, base price, etc.</p>
+                        <a  service_name='Salon Class" class="btn btn-secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="path-to-image.jpg" class="card-img-top" alt="Salon for Men/Kids">
+                    <div class="card-body">
+                        <h5 class="card-title">Salon for Men/Kids</h5>
+                        <p class="card-text">Details about ratings, base price, etc.</p>
+                        <a  service_name='Salon for Men & Kids' class="btn btn-secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="path-to-image.jpg" class="card-img-top" alt="Head Massage">
+                    <div class="card-body">
+                        <h5 class="card-title">Head Massage</h5>
+                        <p class="card-text">Details about ratings, base price, etc.</p>
+                        <a service_name='Head Massage' class="btn btn-secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service History Section -->
+    <section>
+        <h3>Your Service History</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service Name</th>
+                    <th>Professional Name</th>
+                    <th>Phone No.</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                <tr>
+                    <td>{{ service.id }}</td>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.professional_name }}</td>
+                    <td>{{ service.phone_no }}</td>
+                    <td><a href="{{ url_for('close_service', service_id=service.id) }}" class="btn btn-danger">Close it?</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No service history found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Service Remarks{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3>Service Remarks</h3>
+        <form action="{{ url_for('customer_dashboard') }}" method="POST">
+            <input type="hidden" name="request_id" value="{{ request_id }}">
+            
+            <div class="mb-3">
+                <label>Service Name</label>
+                <input type="text" class="form-control" value="{{ service_name }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea class="form-control" readonly>{{ description }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label>Professional Name</label>
+                <input type="text" class="form-control" value="{{ professional_name }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label>Contact No.</label>
+                <input type="text" class="form-control" value="{{ contact_no }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label>Service Rating</label>
+                <input type="number" name="rating" class="form-control" min="1" max="5" required>
+            </div>
+            <div class="mb-3">
+                <label>Remarks (if any)</label>
+                <textarea name="remarks" class="form-control"></textarea>
+            </div>
+            <form action="{{ url_for('customer_dashboard') }}" method="post">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <a href="{{ url_for('customer_dashboard') }}" class="btn btn-secondary">Close</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

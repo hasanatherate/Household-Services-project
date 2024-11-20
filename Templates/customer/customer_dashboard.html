@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3>Best Cleaning Packages</h3>
+        <div class="list-group">
+            <!-- Main services with links to subservices -->
+            <a href="{{ url_for('subservices', main_service='cleaning') }}" class="list-group-item list-group-item-action">Cleaning</a>
+            <a href="{{ url_for('subservices', main_service='ac_repair') }}" class="list-group-item list-group-item-action">AC Repair</a>
+            <a href="{{ url_for('subservices', main_service='salon') }}" class="list-group-item list-group-item-action">Salon</a>
+            <a href="{{ url_for('subservices', main_service='electrical') }}" class="list-group-item list-group-item-action">Electrical</a>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h3>Service History</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service Name</th>
+                    <th>Professional Name</th>
+                    <th>Phone no.</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example service history rows. Replace these with dynamic content from the database -->
+                <tr>
+                    <td>1</td>
+                    <td>Full Home Cleaning</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td><a href="{{ url_for('remarks')}}" class="btn btn-outline-primary btn-sm">Close it?</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>AC Repair</td>
+                    <td>Jane Smith</td>
+                    <td>0987654321</td>
+                    <td>Closed</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Salon</td>
+                    <td>Alex Brown</td>
+                    <td>1122334455</td>
+                    <td>Requested</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Professional Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Service Professional Sign Up</h1>
+        <form action="/professional/professional_signup" method="POST" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">Email ID (Username):</label>
+                <div class="col-sm-9">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label">Password:</label>
+                <div class="col-sm-9">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="fullname" class="col-sm-3 col-form-label">Full Name:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="Enter your full name" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="service_name" class="col-sm-3 col-form-label">Service Name:</label>
+                <div class="col-sm-9">
+                    <select id="service_name" name="service_name" class="form-control" required>
+                        <option value="">Select a service</option>
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="AC Servicing">AC Servicing</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Carpentry">Carpentry</option>
+                        <option value="Gardening">Gardening</option>
+                        <option value="Pest Control">Pest Control</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="experience" class="col-sm-3 col-form-label">Experience (Years):</label>
+                <div class="col-sm-9">
+                    <input type="number" id="experience" name="experience" class="form-control" placeholder="Enter your experience in years" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="documents" class="col-sm-3 col-form-label">Attach Documents (PDF):</label>
+                <div class="col-sm-9">
+                    <input type="file" id="documents" name="documents" class="form-control-file" accept=".pdf" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="address" class="col-sm-3 col-form-label">Address:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="pincode" class="col-sm-3 col-form-label">Pincode:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Enter your pincode" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="/admin_login">Already have an account? Login here.</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
