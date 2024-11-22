@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-body">
         <h3>Service Remarks</h3>
-        <form action="{{ url_for('customer_dashboard') }}" method="POST">
+        <form action="{{ url_for('customer.customer_dashboard') }}" method="POST">
             <input type="hidden" name="request_id" value="{{ request_id }}">
             
             <div class="mb-3">
@@ -33,10 +33,10 @@
                 <label>Remarks (if any)</label>
                 <textarea name="remarks" class="form-control"></textarea>
             </div>
-            <form action="{{ url_for('customer_dashboard') }}" method="post">
+            <form action="{{ url_for('customer.customer_dashboard') }}" method="post">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <a href="{{ url_for('customer_dashboard') }}" class="btn btn-secondary">Close</a>
+            <a href="{{ url_for('customer.customer_dashboard') }}" class="btn btn-secondary">Close</a>
         </form>
     </div>
 </div>

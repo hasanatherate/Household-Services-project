@@ -16,44 +16,32 @@
     </div>
 </div>
 
-<div class="card mt-4">
-    <div class="card-body">
-        <h3>Service History</h3>
+<div class="container mt-4">
+    <h2>Your Service Requests</h2>
+    
+    {% if service_data %}
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Service Name</th>
-                    <th>Professional Name</th>
-                    <th>Phone no.</th>
+                    <th>Service</th>
+                    <th>Professional</th>
                     <th>Status</th>
+                    <th>Date Requested</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Example service history rows. Replace these with dynamic content from the database -->
+                {% for service in service_data %}
                 <tr>
-                    <td>1</td>
-                    <td>Full Home Cleaning</td>
-                    <td>John Doe</td>
-                    <td>1234567890</td>
-                    <td><a href="{{ url_for('customer.remarks')}}" class="btn btn-outline-primary btn-sm">Close it?</a></td>
+                    <td>{{ service.service_request_id }}</td>
+                    <td>{{ service.service_name }}</td>
+                    <td>{{ service.status }}</td>
+                    <td>{{ service.date_requested }}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>AC Repair</td>
-                    <td>Jane Smith</td>
-                    <td>0987654321</td>
-                    <td>Closed</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Salon</td>
-                    <td>Alex Brown</td>
-                    <td>1122334455</td>
-                    <td>Requested</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
-    </div>
+    {% else %}
+        <p>You have no service requests yet.</p>
+    {% endif %}
 </div>
 {% endblock %}

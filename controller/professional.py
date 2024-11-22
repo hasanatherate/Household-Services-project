@@ -15,7 +15,7 @@ def professional_signup():
         address = request.form.get('address')
         pincode = request.form.get('pincode')
 
-        connection = sqlite3.connect('database.db',check_same_thread=False)
+        connection = sqlite3.connect('database.db')
         cursor = connection.cursor()
         cursor.execute('''
             INSERT INTO professionals (email, password, full_name, service_name, experience, address, pincode)

@@ -7,134 +7,76 @@
         <h2>{{ main_service | capitalize }} Services</h2>
         <h5>Best Packages for {{ main_service | capitalize }}</h5>
 
-        <ul class="list-group">
+        <ul class="""list-group"></ul>
             {% if main_service == 'ac_repair' %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="""list-group-item d-flex justify-content-between align-items-center"></li>
                     <div><strong>AC Installation</strong><br><small>Installation of new AC units</small></div>
                     <span>$150</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <a href="{{ url_for('customer.book_service', service_id=1) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div><strong>AC Maintenance</strong><br><small>Routine maintenance of AC units</small></div>
                     <span>$100</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <a href="{{ url_for('customer.book_service', service_id=2) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div><strong>AC Cleaning</strong><br><small>Thorough cleaning of AC units</small></div>
                     <span>$80</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Gas Refilling</strong><br><small>Refilling of AC gas</small></div>
-                    <span>$50</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <a href="{{ url_for('customer.book_service', service_id=3) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
             {% elif main_service == 'salon' %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Haircut</strong><br><small>Professional haircut services</small></div>
-                    <span>$20</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Haircut</strong><br><small>Professional haircut service</small></div>
+                    <span>$50</span>
+                    <a href="{{ url_for('customer.book_service', service_id=7) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Facial</strong><br><small>Refreshing facial treatments</small></div>
-                    <span>$30</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Facial</strong><br><small>Relaxing facial treatment</small></div>
+                    <span>$70</span>
+                    <a href="{{ url_for('customer.book_service', service_id=8) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Manicure & Pedicure</strong><br><small>Complete nail care</small></div>
-                    <span>$25</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Hair Coloring</strong><br><small>Professional hair coloring services</small></div>
+                    <div><strong>Manicure</strong><br><small>Professional manicure service</small></div>
                     <span>$40</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <a href="{{ url_for('customer.book_service', service_id=9) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
             {% elif main_service == 'cleaning' %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Full Home Cleaning</strong><br><small>Deep cleaning for the entire house</small></div>
+                    <div><strong>Home Cleaning</strong><br><small>Complete home cleaning service</small></div>
                     <span>$200</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <a href="{{ url_for('customer.book_service', service_id=4) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Toilet Cleaning</strong><br><small>Sanitization and cleaning of toilets</small></div>
-                    <span>$50</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Office Cleaning</strong><br><small>Professional office cleaning service</small></div>
+                    <span>$250</span>
+                    <a href="{{ url_for('customer.book_service', service_id=5) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Kitchen Cleaning</strong><br><small>Complete kitchen cleaning</small></div>
-                    <span>$80</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Sofa/Carpet Cleaning</strong><br><small>Deep cleaning for sofas and carpets</small></div>
-                    <span>$70</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Carpet Cleaning</strong><br><small>Deep cleaning of carpets</small></div>
+                    <span>$120</span>
+                    <a href="{{ url_for('customer.book_service', service_id=6) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
             {% elif main_service == 'electrical' %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Wiring Installation</strong><br><small>New electrical wiring installation</small></div>
-                    <span>$120</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Wiring</strong><br><small>Complete home wiring service</small></div>
+                    <span>$300</span>
+                    <a href="{{ url_for('customer.book_service', service_id=10) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Light Fixture Installation</strong><br><small>Installation of light fixtures</small></div>
-                    <span>$40</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Lighting Installation</strong><br><small>Installation of lighting fixtures</small></div>
+                    <span>$150</span>
+                    <a href="{{ url_for('customer.book_service', service_id=11) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Fan Repair</strong><br><small>Repair services for ceiling and wall fans</small></div>
-                    <span>$30</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div><strong>Fuse Repair</strong><br><small>Quick repair for electrical fuses</small></div>
-                    <span>$20</span>
-                    <a href="#" class="btn btn-primary btn-sm">Book</a>
+                    <div><strong>Electrical Repair</strong><br><small>Repair of electrical issues</small></div>
+                    <span>$100</span>
+                    <a href="{{ url_for('customer.book_service', service_id=12) }}" class="btn btn-primary btn-sm">Book</a>
                 </li>
             {% else %}
                 <li class="list-group-item">No services available for this category.</li>
             {% endif %}
         </ul>
     </div>
-    <div class="card mt-4">
-        <div class="card-body">
-            <h3>Service History</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Service Name</th>
-                        <th>Professional Name</th>
-                        <th>Phone no.</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example service history rows. Replace these with dynamic content from the database -->
-                    <tr>
-                        <td>1</td>
-                        <td>Full Home Cleaning</td>
-                        <td>John Doe</td>
-                        <td>1234567890</td>
-                        <td><a href="{{ url_for('remarks')}}" class="btn btn-outline-primary btn-sm">Close it?</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>AC Repair</td>
-                        <td>Jane Smith</td>
-                        <td>0987654321</td>
-                        <td>Closed</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Salon</td>
-                        <td>Alex Brown</td>
-                        <td>1122334455</td>
-                        <td>Requested</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    
+     
 {% endblock %}

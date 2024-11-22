@@ -1,9 +1,9 @@
-<!-- admin_dashboard.html -->
 {% extends "layout.html" %}
 
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
+<!-- Services Section -->
 <div class="card">
     <div class="card-body">
         <h5 class="card-title mb-3">Services</h5>
@@ -27,8 +27,10 @@
                         <td>{{ service[3] }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-outline-primary">Edit</button>
-                                <button type="button" class="btn btn-outline-danger">Delete</button>
+                                <a href="{{ url_for('admin.edit_service', service_id=service[0]) }}" class="btn btn-outline-primary">Edit</a>
+                                <form action="{{ url_for('admin.delete_service', service_id=service[0]) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -40,6 +42,73 @@
             <a href="{{ url_for('admin.new_service') }}" class="new-service">
                 <i class="fas fa-plus-circle"></i> New Service
             </a>
+        </div>
+    </div>
+</div>
+
+<!-- Professionals Section -->
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Service Professionals</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Service Type</th>
+                        <th>Experience (Years)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for professional in professionals %}
+                    <tr>
+                        <td>{{ professional[0] }}</td>
+                        <td>{{ professional[3] }}</td>
+                        <td>{{ professional[4] }}</td>
+                        <td>{{ professional[5] }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-outline-info">View</a>
+                                <a href="#" class="btn btn-outline-danger">Block</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Service Requests Section -->
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Service Requests</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Service</th>
+                        <th>Customer</th>
+                        <th>Professional</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in service_requests %}
+                    <tr>
+                        <td>{{ request[0] }}</td>
+                        <td>{{ request[2] }}</td>
+                        <td>{{ request[3] }}</td>
+                        <td>{{ request[4] }}</td>
+                        <td>{{ request[5] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
