@@ -13,6 +13,7 @@ class Customer(db.Model):
     address = db.Column(db.String(120), nullable=False)
     pincode = db.Column(db.String(20), nullable=False)
 
+
 class Professional(db.Model):
     __tablename__ = 'professionals'
     id = db.Column(db.Integer, primary_key=True)
@@ -39,5 +40,7 @@ class ServiceRequest(db.Model):
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'), nullable=False)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
     professional_id = db.Column(db.Integer, db.ForeignKey('professionals.id'), nullable=True)
+    name = db.Column(db.String(120), nullable=False)
     status = db.Column(db.String(50), nullable=False)
     date_requested = db.Column(db.DateTime, default=db.func.current_timestamp())
+

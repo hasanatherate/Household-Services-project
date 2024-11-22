@@ -19,21 +19,21 @@
 <div class="container mt-4">
     <h2>Your Service Requests</h2>
     
-    {% if service_data %}
+    {% if service_requests %}
         <table class="table">
             <thead>
                 <tr>
                     <th>Service</th>
-                    <th>Professional</th>
+                    <th>Serivce Name</th>
                     <th>Status</th>
                     <th>Date Requested</th>
                 </tr>
             </thead>
             <tbody>
-                {% for service in service_data %}
+                {% for service in service_requests %}
                 <tr>
-                    <td>{{ service.service_request_id }}</td>
-                    <td>{{ service.service_name }}</td>
+                    <td>{{ service.id }}</td>
+                    <td>{{ service.name }}</td>
                     <td>{{ service.status }}</td>
                     <td>{{ service.date_requested }}</td>
                 </tr>

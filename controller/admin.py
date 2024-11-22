@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 import sqlite3
-
+from model import ServiceRequest,Service,Professional,db
+from config import SUBSERVICES
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 # Admin Login
@@ -14,35 +15,26 @@ def login():
 # Admin Dashboard
 @admin_bp.route('/admin_dashboard', methods=['GET', 'POST'])
 def admin_dashboard():
+    # Check for admin role
     if session.get('user_role') != 'admin':
         return redirect(url_for('admin.login'))
 
-    # Fetch data from the database
-    connection = sqlite3.connect('database.db', check_same_thread=False)
-    cursor = connection.cursor()
-    
-    # Fetch services data
-    cursor.execute("SELECT * FROM services")
-    services = cursor.fetchall()
-    
-    # Fetch professionals data
-    cursor.execute("SELECT * FROM professionals")
-    professionals = cursor.fetchall()
-    
-    # Fetch service requests data
-    cursor.execute("SELECT * FROM service_requests")
-    service_requests = cursor.fetchall()
-    
-    connection.close()
+    # Fetch data using SQLAlchemy
+    services = Service.query.all()  # Fetch all services
+    professionals = Professional.query.all()  # Fetch all professionals
+    service_requests = ServiceRequest.query.all()  # Fetch all service requests
 
-    return render_template('admin/admin_dashboard.html', 
-                           services=services, 
-                           professionals=professionals,
-                           service_requests=service_requests,
-                           user_role='admin')
+    # Render the admin dashboard with service requests data
+    return render_template(
+        'admin/admin_dashboard.html',
+        services=services,
+        professionals=professionals,
+        service_requests=service_requests,  # Pass the service requests to the template
+        user_role='admin'
+    )
 
 
-# Add a New Service
+
 @admin_bp.route('/new_service', methods=['GET', 'POST'])
 def new_service():
     if session.get('user_role') != 'admin':
@@ -53,26 +45,23 @@ def new_service():
         description = request.form.get('description')
         base_price = request.form.get('base_price')
 
-        connection = sqlite3.connect('database.db')
-        cursor = connection.cursor()
-        cursor.execute('''
-            INSERT INTO services(service_name, description, base_price)
-            VALUES (?, ?, ?)
-        ''', (service_name, description, base_price))
-        connection.commit()
-        connection.close()
+        # Create a new Service instance
+        new_service = Service(service_name=service_name, description=description, base_price=base_price)
+
+        # Add the new service to the session and commit
+        db.session.add(new_service)
+        db.session.commit()
 
         return redirect(url_for('admin.admin_dashboard'))
-    
-    return render_template('admin/new_service.html')
 
+    return render_template('admin/new_service.html')
 @admin_bp.route('/delete_service/<int:service_id>', methods=['POST'])
 def delete_service(service_id):
     if session.get('user_role') != 'admin':
         return redirect(url_for('admin.login'))
 
     # Connect to the database
-    connection = sqlite3.connect('database.db', check_same_thread=False)
+    connection = sqlite3.connect('instance/database.db', check_same_thread=False)
     cursor = connection.cursor()
 
     # Delete the service by ID
@@ -87,7 +76,7 @@ def edit_service(service_id):
     if session.get('user_role') != 'admin':
         return redirect(url_for('admin.login'))
     
-    connection = sqlite3.connect('database.db', check_same_thread=False)
+    connection = sqlite3.connect('instance/database.db', check_same_thread=False)
     cursor = connection.cursor()
 
     if request.method == 'POST':
@@ -112,6 +101,7 @@ def edit_service(service_id):
     connection.close()
 
     return render_template('admin/new_service.html', service_id=service_id, service=service)
+
 
 # Search and Summary Pages
 @admin_bp.route('/admin_search')

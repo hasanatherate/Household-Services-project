@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 import sqlite3
+from model import ServiceRequest,Service,Professional,db,Customer
 
 professional_bp = Blueprint('professional', __name__, url_prefix='/professional')
 
@@ -15,7 +16,7 @@ def professional_signup():
         address = request.form.get('address')
         pincode = request.form.get('pincode')
 
-        connection = sqlite3.connect('database.db')
+        connection = sqlite3.connect('instance/database.db')
         cursor = connection.cursor()
         cursor.execute('''
             INSERT INTO professionals (email, password, full_name, service_name, experience, address, pincode)
@@ -31,9 +32,21 @@ def professional_signup():
     return render_template('professional/professional_signup.html')
 
 # Professional Dashboard
-@professional_bp.route('/professional_dashboard')
+@professional_bp.route('/professional_dashboard', methods=['GET', 'POST'])
 def professional_dashboard():
-    return render_template('professional/professional_dashboard.html', user_role='professional')
+    if session.get('user_role') != 'professional':
+        return redirect(url_for('professional.professional_signup'))  # Redirect if not logged in as a professional
+    
+    professional_id = session.get('user_id')  # Get the logged-in professional's ID
+    
+    # Fetch service requests assigned to the logged-in professional
+    service_requests = ServiceRequest.query.filter_by(professional_id=professional_id).all()
+    customers=Customer.query.all()
+
+    return render_template('professional/professional_dashboard.html', 
+                           service_requests=service_requests
+                           ,customers=customers)
+
 
 # Search and Summary Pages
 @professional_bp.route('/professional_search')

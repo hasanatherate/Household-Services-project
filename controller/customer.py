@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session,flash
 import sqlite3
-from model import Service,ServiceRequest, db
+from model import Service,ServiceRequest,Professional, db
 from config import SUBSERVICES
 
 
@@ -16,7 +16,7 @@ def customer_signup():
         address = request.form['address']
         pincode = request.form['pincode']
 
-        connection = sqlite3.connect('database.db', check_same_thread=False)
+        connection = sqlite3.connect('instance/database.db', check_same_thread=False)
 
         cursor = connection.cursor()
         cursor.execute('''
@@ -36,20 +36,30 @@ def customer_signup():
 
 @customer_bp.route('/book_service/<int:service_id>', methods=['POST', 'GET'])
 def book_service(service_id):
-    customer_id = 1  # Replace with actual customer ID once authentication is implemented
+    customer_id = session.get('customer_id', 1)  # Replace with actual customer authentication
     status = "Requested"
 
-    # Insert the service request into the database
-    connection = sqlite3.connect('instance/database.db')
-    cursor = connection.cursor()
+    # Determine the service_name from the SUBSERVICES mapping
+    name = None
+    for main_service, subservices in SUBSERVICES.items():
+        if service_id in subservices:
+            name = subservices[service_id]  # Get the subservice name
+            break
+    
+    if not name:
+        name = None
 
-    query = """
-    INSERT INTO service_requests (customer_id, service_id,status)
-    VALUES (?, ?, ?)
-    """
-    cursor.execute(query, (customer_id, service_id,status))
-    connection.commit()
-    connection.close()
+    # Create a new ServiceRequest instance
+    new_request = ServiceRequest(
+        service_id=service_id,
+        customer_id=customer_id,
+        name=name,
+        status=status
+    )
+
+    # Add the new request to the session and commit the transaction
+    db.session.add(new_request)
+    db.session.commit()
 
     return redirect(url_for('customer.customer_dashboard'))
 @customer_bp.route('/customer_dashboard')
@@ -60,29 +70,9 @@ def customer_dashboard():
     # Query service requests for this customer
     service_requests = ServiceRequest.query.filter_by(customer_id=customer_id).all()
 
-    # Map service requests to include service name from the config file
-    service_data = []
-    for request in service_requests:
-        # Get main service and subservices mapping from the config
-        main_service = None
-        subservices = None
-        for service, subs in SUBSERVICES.items():
-            if request.service_id in subs:
-                main_service = service
-                subservices = subs
-                break
+    # Pass the service requests directly to the template
+    return render_template('customer/customer_dashboard.html', service_requests=service_requests)
 
-        service_name = subservices.get(request.service_id, "Unknown") if subservices else "Unknown"
-
-        # Append details to service_data
-        service_data.append({
-            "service_request_id": request.id,
-            "service_name": service_name,
-            "status": request.status,
-            "date_requested": request.date_requested,
-        })
-
-    return render_template('customer/customer_dashboard.html', service_data=service_data)
 @customer_bp.route('/subservices/<main_service>', methods=['GET'])
 def subservices(main_service):
     return render_template('customer/subservices.html', subservices=SUBSERVICES, main_service=main_service)

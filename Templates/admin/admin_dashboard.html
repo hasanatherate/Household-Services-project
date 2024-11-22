@@ -21,14 +21,14 @@
                 <tbody>
                     {% for service in services %}
                     <tr>
-                        <td>{{ service[0] }}</td>
-                        <td>{{ service[1] }}</td>
-                        <td>{{ service[2] }}</td>
-                        <td>{{ service[3] }}</td>
+                        <td>{{ service.id }}</td>  <!-- Access ID directly -->
+                        <td>{{ service.service_name }}</td>  <!-- Access service_name -->
+                        <td>{{ service.description }}</td>  <!-- Access description -->
+                        <td>{{ service.base_price }}</td>  <!-- Access base_price -->
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ url_for('admin.edit_service', service_id=service[0]) }}" class="btn btn-outline-primary">Edit</a>
-                                <form action="{{ url_for('admin.delete_service', service_id=service[0]) }}" method="POST" style="display:inline;">
+                                <a href="{{ url_for('admin.edit_service', service_id=service.id) }}" class="btn btn-outline-primary">Edit</a>
+                                <form action="{{ url_for('admin.delete_service', service_id=service.id) }}" method="POST" style="display:inline;">
                                     <button type="submit" class="btn btn-outline-danger">Delete</button>
                                 </form>
                             </div>
@@ -64,10 +64,10 @@
                 <tbody>
                     {% for professional in professionals %}
                     <tr>
-                        <td>{{ professional[0] }}</td>
-                        <td>{{ professional[3] }}</td>
-                        <td>{{ professional[4] }}</td>
-                        <td>{{ professional[5] }}</td>
+                        <td>{{ professional.id }}</td>  <!-- Access ID directly -->
+                        <td>{{ professional.full_name }}</td>  <!-- Access full_name -->
+                        <td>{{ professional.service_name }}</td>  <!-- Access service_name -->
+                        <td>{{ professional.experience }}</td>  <!-- Access experience -->
                         <td>
                             <div class="btn-group btn-group-sm">
                                 <a href="#" class="btn btn-outline-info">View</a>
@@ -83,33 +83,34 @@
 </div>
 
 <!-- Service Requests Section -->
-<div class="card mt-4">
-    <div class="card-body">
-        <h5 class="card-title mb-3">Service Requests</h5>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead class="table-light">
-                    <tr>
-                        <th>Request ID</th>
-                        <th>Service</th>
-                        <th>Customer</th>
-                        <th>Professional</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for request in service_requests %}
-                    <tr>
-                        <td>{{ request[0] }}</td>
-                        <td>{{ request[2] }}</td>
-                        <td>{{ request[3] }}</td>
-                        <td>{{ request[4] }}</td>
-                        <td>{{ request[5] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+<<div class="container mt-4">
+
+    
+    <h3>Service Requests</h3>
+    {% if service_requests %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Professional</th>
+                    <th>Status</th>
+                    <th>Date Requested</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in service_requests %}
+                <tr>
+                    <td>{{ request.name }}</td>  <!-- Display service name -->>
+                    <td>{{ request.professional.full_name if request.professional else 'Not Assigned' }}</td>  <!-- Display professional name if assigned -->
+                    <td>{{ request.status }}</td>
+                    <td>{{ request.date_requested }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No service requests available.</p>
+    {% endif %}
 </div>
+
 {% endblock %}
